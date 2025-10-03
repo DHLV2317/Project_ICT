@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicConnect - Transparent Governance Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-city"></i>
+                <span>CivicConnect</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#report" class="nav-item" data-section="report">
+                    <i class="fas fa-exclamation-triangle"></i> Report Issue
+                </a>
+                <a href="#track" class="nav-item" data-section="track">
+                    <i class="fas fa-search"></i> Track Reports
+                </a>
+                <a href="#analytics" class="nav-item" data-section="analytics">
+                    <i class="fas fa-chart-bar"></i> Analytics
+                </a>
+                <a href="#stakeholders" class="nav-item" data-section="stakeholders">
+                    <i class="fas fa-users"></i> Stakeholders
+                </a>
+                <a href="#profile" class="nav-item" data-section="profile">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+            </div>
+            <div class="nav-actions">
+                <button class="offline-status" id="offlineStatus">
+                    <i class="fas fa-wifi"></i> Online
+                </button>
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section active">
+            <div class="section-header">
+                <h1>Civic Engagement Dashboard</h1>
+                <p>Promoting transparent institutions and inclusive participation for better governance</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-file-alt"></i>
+                    <div class="stat-info">
+                        <h3 id="totalReports">0</h3>
+                        <p>Total Reports</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="stat-info">
+                        <h3 id="resolvedReports">0</h3>
+                        <p>Resolved Issues</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-info">
+                        <h3 id="pendingReports">0</h3>
+                        <p>Pending Issues</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-info">
+                        <h3 id="activeUsers">0</h3>
+                        <p>Active Citizens</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Recent Activity</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="recentActivity" class="activity-list">
+                            <!-- Recent activity items will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>SDG Progress</h3>
+                        <p>Sustainable Development Goals 16.6 & 10.2</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="sdg-progress">
+                            <div class="sdg-item">
+                                <div class="sdg-icon">16.6</div>
+                                <div class="sdg-details">
+                                    <h4>Transparent Institutions</h4>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                    </div>
+                                    <span>75% Progress</span>
+                                </div>
+                            </div>
+                            <div class="sdg-item">
+                                <div class="sdg-icon">10.2</div>
+                                <div class="sdg-details">
+                                    <h4>Inclusive Participation</h4>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 68%"></div>
+                                    </div>
+                                    <span>68% Progress</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report Issue Section -->
+        <section id="report" class="content-section">
+            <div class="section-header">
+                <h1>Report a Public Issue</h1>
+                <p>Help improve your community by reporting issues to relevant authorities</p>
+            </div>
+
+            <div class="report-form-container">
+                <form id="reportForm" class="report-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="issueTitle">Issue Title*</label>
+                            <input type="text" id="issueTitle" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="issueCategory">Category*</label>
+                            <select id="issueCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="infrastructure">Infrastructure</option>
+                                <option value="public-safety">Public Safety</option>
+                                <option value="environment">Environment</option>
+                                <option value="transportation">Transportation</option>
+                                <option value="public-services">Public Services</option>
+                                <option value="corruption">Corruption/Transparency</option>
+                                <option value="accessibility">Accessibility</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priority">Priority Level</label>
+                            <select id="priority">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                                <option value="urgent">Urgent</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" placeholder="Address or landmark">
+                            <button type="button" class="location-btn" id="getLocationBtn">
+                                <i class="fas fa-map-marker-alt"></i> Use Current Location
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Detailed Description*</label>
+                        <textarea id="description" rows="5" required 
+                                  placeholder="Please provide a detailed description of the issue, including when it occurred and any relevant context..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="evidence">Upload Evidence</label>
+                        <input type="file" id="evidence" multiple accept="image/*,video/*,.pdf">
+                        <div class="file-info">
+                            <i class="fas fa-info-circle"></i>
+                            Accepted formats: Images, videos, PDF documents
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="publicReport">
+                            <span class="checkmark"></span>
+                            Make this report public (promotes transparency)
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="anonymousReport">
+                            <span class="checkmark"></span>
+                            Submit anonymously (for sensitive issues)
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="saveDraftBtn">
+                            <i class="fas fa-save"></i> Save Draft
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Submit Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Track Reports Section -->
+        <section id="track" class="content-section">
+            <div class="section-header">
+                <h1>Track Your Reports</h1>
+                <p>Monitor the progress of your submitted issues</p>
+            </div>
+
+            <div class="tracking-controls">
+                <div class="search-filter">
+                    <input type="text" id="searchReports" placeholder="Search by title or ID...">
+                    <select id="statusFilter">
+                        <option value="">All Statuses</option>
+                        <option value="submitted">Submitted</option>
+                        <option value="under-review">Under Review</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="resolved">Resolved</option>
+                        <option value="closed">Closed</option>
+                    </select>
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="infrastructure">Infrastructure</option>
+                        <option value="public-safety">Public Safety</option>
+                        <option value="environment">Environment</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="public-services">Public Services</option>
+                        <option value="corruption">Corruption/Transparency</option>
+                        <option value="accessibility">Accessibility</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="reportsContainer" class="reports-container">
+                <!-- Reports will be populated here -->
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics" class="content-section">
+            <div class="section-header">
+                <h1>Transparency Analytics</h1>
+                <p>Data-driven insights for better governance and accountability</p>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Issue Resolution Trends</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="resolutionChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Category Distribution</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="categoryChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Response Time Analysis</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="response-stats">
+                            <div class="stat-item">
+                                <span class="label">Average Response Time</span>
+                                <span class="value">3.2 days</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="label">Resolution Rate</span>
+                                <span class="value">78%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="label">Citizen Satisfaction</span>
+                                <span class="value">4.2/5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Geographic Distribution</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="mapContainer" class="map-container">
+                            <!-- Interactive map would be implemented here -->
+                            <div class="map-placeholder">
+                                <i class="fas fa-map"></i>
+                                <p>Interactive map showing issue distribution across the city</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stakeholders Section -->
+        <section id="stakeholders" class="content-section">
+            <div class="section-header">
+                <h1>Stakeholder Mapping</h1>
+                <p>Understanding the network of actors in civic engagement</p>
+            </div>
+
+            <div class="stakeholder-grid">
+                <div class="stakeholder-category">
+                    <h3>Government Entities</h3>
+                    <div class="stakeholder-list">
+                        <div class="stakeholder-item">
+                            <div class="stakeholder-info">
+                                <h4>Municipal Government</h4>
+                                <p>Primary authority for local issues</p>
+                                <span class="influence-level high">High Influence</span>
+                            </div>
+                        </div>
+                        <div class="stakeholder-item">
+                            <div class="stakeholder-info">
+                                <h4>Police Department</h4>
+                                <p>Public safety and security</p>
+                                <span class="influence-level high">High Influence</span>
+                            </div>
+                        </div>
+                        <div class="stakeholder-item">
+                            <div class="stakeholder-info">
+                                <h4>Environmental Agency</h4>
+                                <p>Environmental issues and regulations</p>
+                                <span class="influence-level medium">Medium Influence</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stakeholder-category">
+                    <h3>Civil Society</h3>
+                    <div class="stakeholder-list">
+                        <div class="stakeholder-item">
+                            <div class="stakeholder-info">
+                                <h4>Citizens</h4>
+                                <p>Primary beneficiaries and reporters</p>
+                                <span class="influence-level high">High Interest</span>
+                            </div>
+                        </div>
+                        <div class="stakeholder-item">
+                            <div class="stakeholder-info">
+                                <h4>NGOs & Advocacy Groups</h4>
+                                <p>Community organizers and advocates</p>
+                                <span class="influence-level medium">Medium Influence</span>
+                            </div>
+                        </div>
+                        <div class="stakeholder-item">
+                            <div class="stakeholder-info">
+                                <h4>Marginalized Communities</h4>
+                                <p>Vulnerable populations needing special attention</p>
+                                <span class="influence-level low">High Need</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stakeholder-category">
+                    <h3>Private Sector</h3>
+                    <div class="stakeholder-list">
+                        <div class="stakeholder-item">
+                            <div class="stakeholder-info">
+                                <h4>Utility Companies</h4>
+                                <p>Infrastructure service providers</p>
+                                <span class="influence-level medium">Medium Influence</span>
+                            </div>
+                        </div>
+                        <div class="stakeholder-item">
+                            <div class="stakeholder-info">
+                                <h4>Technology Partners</h4>
+                                <p>Platform development and maintenance</p>
+                                <span class="influence-level low">Low Influence</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stakeholder-mapping">
+                <h3>Influence vs Interest Matrix</h3>
+                <div class="matrix-container">
+                    <div class="matrix-grid">
+                        <div class="matrix-quadrant high-influence high-interest">
+                            <h4>Manage Closely</h4>
+                            <div class="stakeholder-dot" data-stakeholder="Municipal Government">MG</div>
+                            <div class="stakeholder-dot" data-stakeholder="Citizens">C</div>
+                        </div>
+                        <div class="matrix-quadrant high-influence low-interest">
+                            <h4>Keep Satisfied</h4>
+                            <div class="stakeholder-dot" data-stakeholder="Police Department">PD</div>
+                        </div>
+                        <div class="matrix-quadrant low-influence high-interest">
+                            <h4>Keep Informed</h4>
+                            <div class="stakeholder-dot" data-stakeholder="NGOs">NGO</div>
+                            <div class="stakeholder-dot" data-stakeholder="Marginalized Communities">MC</div>
+                        </div>
+                        <div class="matrix-quadrant low-influence low-interest">
+                            <h4>Monitor</h4>
+                            <div class="stakeholder-dot" data-stakeholder="Technology Partners">TP</div>
+                        </div>
+                    </div>
+                    <div class="matrix-labels">
+                        <span class="y-label">Interest</span>
+                        <span class="x-label">Influence</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="content-section">
+            <div class="section-header">
+                <h1>User Profile</h1>
+                <p>Manage your account and accessibility preferences</p>
+            </div>
+
+            <div class="profile-container">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="userName">Demo User</h3>
+                            <p id="userEmail">demo@example.com</p>
+                            <span class="user-type">Verified Citizen</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-settings">
+                        <h4>Accessibility Settings</h4>
+                        <div class="setting-group">
+                            <label class="setting-label">
+                                <input type="checkbox" id="highContrast">
+                                <span>High Contrast Mode</span>
+                            </label>
+                            <label class="setting-label">
+                                <input type="checkbox" id="largeText">
+                                <span>Large Text</span>
+                            </label>
+                            <label class="setting-label">
+                                <input type="checkbox" id="screenReader">
+                                <span>Screen Reader Support</span>
+                            </label>
+                        </div>
+
+                        <h4>Language & Region</h4>
+                        <div class="setting-group">
+                            <label for="language">Preferred Language</label>
+                            <select id="language">
+                                <option value="en">English</option>
+                                <option value="es">Español</option>
+                                <option value="fr">Français</option>
+                                <option value="ar">العربية</option>
+                            </select>
+                        </div>
+
+                        <h4>Notifications</h4>
+                        <div class="setting-group">
+                            <label class="setting-label">
+                                <input type="checkbox" id="emailNotifications" checked>
+                                <span>Email Notifications</span>
+                            </label>
+                            <label class="setting-label">
+                                <input type="checkbox" id="smsNotifications">
+                                <span>SMS Notifications</span>
+                            </label>
+                        </div>
+
+                        <div class="profile-actions">
+                            <button class="btn btn-primary">Save Changes</button>
+                            <button class="btn btn-secondary">Export Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Welcome to CivicConnect</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label for="regName">Full Name*</label>
+                        <input type="text" id="regName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">Email Address*</label>
+                        <input type="email" id="regEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPhone">Phone Number</label>
+                        <input type="tel" id="regPhone">
+                    </div>
+                    <div class="form-group">
+                        <label for="regLocation">Location/District</label>
+                        <input type="text" id="regLocation">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <span class="checkmark"></span>
+                            I agree to the Terms of Service and Privacy Policy
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Create Account</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
